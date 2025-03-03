@@ -1,44 +1,39 @@
-import React, { useState } from 'react';
-import { Container } from 'react-bootstrap';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import axios from 'axios';
-
+import React, { useState } from "react";
+import { Container, Form, Button } from "react-bootstrap";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const Create = () => {
-   const [uploadedImage, setUploadedImage] = useState(null);
   const [item, setItem] = useState({
     title: "",
     desc: "",
-    photo: ""
+    photo: "",
   });
+  const navigate = useNavigate();
 
+  const [uploadedImage, setUploadedImage] = useState(null);
   const handleChange = (e) => {
     setItem({ ...item, [e.target.name]: e.target.value });
   };
-
   const handlePhoto = (e) => {
-    setItem({ ...item, photo: e.target.files[0] });  // ⬅️ Fix: Access the first file
+    setItem({ ...item, photo: e.target.files[0] });
     setUploadedImage(URL.createObjectURL(e.target.files[0]));
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
     Object.entries(item).forEach(([key, value]) => {
       formData.append(key, value);
     });
-
-    try {
-      const res = await axios.post("http://localhost:5000/addItem", formData);
-      console.log(res);
-    } catch (err) {
-      console.log("Data not added", err);
-    }
+    await axios
+      .post("http://localhost:5000/addItem", formData)
+      .then((res) => console.log(res))
+      .catch((err) => console.log("Data not added.", err));
+    navigate("/readAll");
   };
 
   return (
-    <Container fluid>
-      <h1>Create Item</h1>
+    <Container>
+      <h1>Create item</h1>
       <Form onSubmit={handleSubmit} encType="multipart/form-data">
         <Form.Group className="mb-3" controlId="title">
           <Form.Label>Title</Form.Label>
@@ -49,17 +44,15 @@ const Create = () => {
             onChange={handleChange}
           />
         </Form.Group>
-
-        <Form.Group className="mb-3" controlId="file">
+        <Form.Group className="mb-3" controlId="photo">
           <Form.Label>Photo</Form.Label>
           <Form.Control
             type="file"
+            onChange={handlePhoto}
             name="photo"
-            accept=".jpg,.jpeg,.png"
-            onChange={handlePhoto} 
+            accept=".jpg, .png, .jpeg, .webp"
           />
         </Form.Group>
-
         <Form.Group className="mb-3" controlId="desc">
           <Form.Label>Description</Form.Label>
           <Form.Control
@@ -70,11 +63,11 @@ const Create = () => {
             onChange={handleChange}
           />
         </Form.Group>
-
         <Button variant="primary" type="submit">
-          Submit
+          Add Item
         </Button>
       </Form>
+      <img src={uploadedImage} alt={item.title} className="img-fluid" />
     </Container>
   );
 };

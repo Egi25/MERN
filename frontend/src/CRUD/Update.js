@@ -1,60 +1,48 @@
-import React, { useState ,useEffect} from 'react';
-import { Container } from 'react-bootstrap';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import axios from 'axios';
-import { useParams,useNavigate } from 'react-router-dom';
-
+import React, { useState, useEffect } from "react";
+import { Container, Form, Button } from "react-bootstrap";
+import axios from "axios";
+import { useParams, useNavigate } from "react-router-dom";
 const Update = () => {
-    const{id} = useParams();
-    const nav = useNavigate();
-    
-   const [item, setItem] = useState({
-       title: "",
-       desc: "",
-       photo: ""
-     });
-
-     const [uploadedImage, setUploadedImage] = useState(null);
-
-
-     useEffect(()=>{
-        const fetchData = async () => {
-            await axios.get("http://localhost:5000/oneItem/"+id)
-            .then(res=>setItem(res.data))
-            .catch((err)=>console.log(err));
-        };
-        fetchData();
-      
-    },[id]);
-
-     const handleChange = (e) => {
-       setItem({ ...item, [e.target.name]: e.target.value });
-     };
-   
-     const handlePhoto = (e) => {
-       setItem({ ...item, photo: e.target.files[0] });  // ⬅️ Fix: Access the first file
-       setUploadedImage(URL.createObjectURL(e.target.files[0]));
-
-     };
-   
-     const handleSubmit = async (e) => {
-       e.preventDefault();
-       const formData = new FormData();
-       Object.entries(item).forEach(([key, value]) => {
-         formData.append(key, value);
-       });
-       try {
-        const res = await axios.patch(`http://localhost:5000/update/${id}`, formData);
-        console.log(res);
-      } catch (err) {
-        console.log("Data not added", err);
-      }
+  const { id } = useParams();
+  const nav = useNavigate();
+  const [item, setItem] = useState({
+    title: "",
+    desc: "",
+    photo: "",
+  });
+  const [uploadedImage, setUploadedImage] = useState(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      await axios
+        .get("http://localhost:5000/oneItem/" + id)
+        .then((res) => setItem(res.data))
+        .catch((err) => console.log(err));
     };
-    
+    fetchData();
+  }, [id]);
+  const handleChange = (e) => {
+    setItem({ ...item, [e.target.name]: e.target.value });
+  };
+  const handlePhoto = (e) => {
+    setItem({ ...item, photo: e.target.files[0] });
+    setUploadedImage(URL.createObjectURL(e.target.files[0]));
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    Object.entries(item).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
+    await axios
+      .patch(`http://localhost:5000/update/${id}`, formData)
+      .then((res) => console.log(res))
+      .catch((err) => console.log("Data not added.", err));
+      nav('/readAll');
+
+  };
   return (
-<Container fluid>
-      <h1>Update Item</h1>
+    <Container>
+      <h1>Update item</h1>
       <Form onSubmit={handleSubmit} encType="multipart/form-data">
         <Form.Group className="mb-3" controlId="title">
           <Form.Label>Title</Form.Label>
@@ -65,17 +53,15 @@ const Update = () => {
             onChange={handleChange}
           />
         </Form.Group>
-
-        <Form.Group className="mb-3" controlId="file">
+        <Form.Group className="mb-3" controlId="photo">
           <Form.Label>Photo</Form.Label>
           <Form.Control
             type="file"
+            onChange={handlePhoto}
             name="photo"
-            accept=".jpg,.jpeg,.png"
-            onChange={handlePhoto} 
+            accept=".jpg, .png, .jpeg, .webp"
           />
         </Form.Group>
-
         <Form.Group className="mb-3" controlId="desc">
           <Form.Label>Description</Form.Label>
           <Form.Control
@@ -86,14 +72,21 @@ const Update = () => {
             onChange={handleChange}
           />
         </Form.Group>
-
         <Button variant="primary" type="submit">
-          update
+          Update Item
         </Button>
       </Form>
-      <img src={'http://localhost:5000/images/%{item.photo}'} alt={item.title} className='img-fluid' />
+      {uploadedImage ? (
+        <img src={uploadedImage} alt={item.title} className="img-fluid" />
+      ) : (
+        <img
+          src={`http://localhost:5000/images/${item.photo}`}
+          alt={item.title}
+          className="img-fluid"
+        />
+      )}
     </Container>
   );
 };
 
-export default Update
+export default Update;
