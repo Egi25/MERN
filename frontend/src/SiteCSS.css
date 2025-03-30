@@ -1,121 +1,264 @@
-
-  .moon-dance-regular {
-    font-family: "Moon Dance", cursive;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 3em;
-    color: #b0705e;
-    text-align: center;
+.moon-dance-regular {
+  font-family: "Moon Dance", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 3em;
+  color: #b0705e;
+  text-align: center;
+  margin-bottom: 1em;
+}
+body {
+  background-color: #faf7f3;
+}
+section {
+  padding-top: 2em;
+}
+p,
+h4,
+.accordion-button,
+footer,
+.title,
+h1 {
+  font-family: "Prompt", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+.julius-sans-one-regular {
+  font-family: "Julius Sans One", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  text-align: center;
+  margin-bottom: 1em;
+  color: #615042;
 }
 
+.nav {
+  background-color: #faf7f3 !important;
+  font-family: "Prompt", sans-serif;
+}
+.logo {
+  width: 2em;
+  height: 2em;
+}
+.hero-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color:#e4dad5; 
+  margin-bottom: 2em;
+  font-family: "Julius Sans One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
 
-.fotohero{
-    position: relative;
-  }
-  .fotohero +div{
-    position: absolute;
-    bottom: 5%; /* Move buttons to the vertical center */
-    left: 5%; /* Position them towards the left side */
-    transform: translateY(-40%); /* Adjust for perfect centering */
-    /* display: flex;
-    flex-direction: row; */
-    gap: 1em; /* Spacing between buttons */
-  }
-  .fotobook {
-   position: relative;
-    width: 100%;
-    height: 400px;
-    
-  }
-  
-  .fotobook img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    
-  }
-  
-  .fotobook div {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    background: rgba(0, 0, 0, 0.5); 
-    color: white;
-    padding: 20px;
-    border-radius: 10px;
-  }
-  .main-banner{
-    background-color: #F5F2F2;
-    text-align: center;
-    font-family: ivymode;
-    font-weight: 400;
-    font-size: 50px;
-    height:3em;
-    padding:1em;
-    color:#353734;
-  }
+.fotohero {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+}
 
-  .image-wrapper {
-    position: relative;
-    display: flex;
-    /* justify-content: center;
-    align-items: center; */
-    width: 100%;
-    height: auto;
-    overflow: hidden;
-    padding-left: 0; 
-   
-  }
+.hero-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.55); 
+  z-index: 1;
   
-  .image1 {
-    width: 50%; /* Reduce size */
-    /* max-width: 250px;  */
-    height: auto;
-    position: relative;
-    z-index: 1;
-    margin-bottom: 2em;
-    margin-left: 0; 
-    
-  }
-  
-  .image2 {
-    width: 50%; /* Reduce size */
-    /* max-width: 180px;  */
-    height: auto;
-    position: absolute;
-    top: 50%;
-    left: 60%;
-    transform: translate(-30%, -30%); /* Center image */
-    z-index: 2;
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
-    margin-left: 0; 
-  }
-  .section-style {
-    background-color: #FAF7F3;
-    width: 100vw; /* Ensures it takes full viewport width */
-    margin: 0em;
-    padding: 0;
-  }
-  footer{
-    background-color: #323431;
-  }
-  .section-style2{
-    /* background-color:#DECCC0;
-    text-align: center;
-    padding-top: 2em;
-    margin-top: 0em;
-    height: auto; */
-    
-      background-color: #DECCC0;
-      text-align: center;
-      padding: 1.5em; /* Reduce padding to decrease height */
-      height: auto; /* Let content define the height */
-      max-height: 400px; /* Set a maximum height */
-      display: flex;
-      flex-direction: column;
-     
-    
-    
-  }
+}
+
+.hero-content {
+  position: absolute;
+  top: 60%;
+  left: 35%;
+  transform: translate(-50%, -50%);
+  z-index: 2; /* Ensures content is above overlay */
+}
+
+.fotobook {
+  position: relative;
+  width: 100%;
+  height: 400px;
+}
+.fotobook::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+.fotobook img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 40%;
+}
+
+.fotobook div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  z-index: 2;
+}
+.main-banner {
+  /* background-color: #9d8a79a9; */
+  background-color:#615042c4;
+  text-align: center;
+  font-family: ivymode;
+  font-weight: 400;
+  font-size: 50px;
+  height: 3em;
+  padding: 1em;
+  color: #faf7f3;
+}
+
+.image-wrapper {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  padding-left: 0;
+}
+
+.image1 {
+  width: 50%; 
+  height: auto;
+  position: relative;
+  z-index: 1;
+  margin-bottom: 2em;
+  margin-left: 0;
+}
+
+.image2 {
+  width: 50%; 
+  height: auto;
+  position: absolute;
+  top: 50%;
+  left: 60%;
+  transform: translate(-30%, -30%); /* Center image */
+  z-index: 2;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+  margin-left: 0;
+}
+.section-style {
+  background-color: #faf7f3;
+}
+footer {
+  background-color: #3f362f96;
+}
+footer a {
+  text-decoration: none;
+}
+.section-style2 {
+
+  background-color: #e6d4c6;
+}
+.kolona {
+  background-color: #e6d4c6;
+  padding: 1em;
+}
+.kolona1 {
+  margin-bottom: 1em;
+  padding: 1em 2em;
+  background-color: #ece6e2;
+}
+.kard {
+  border-radius: 20em;
+  overflow: hidden;
+  text-align: center;
+  background-color: #323431;
+  color: #ece6e2;
+  border: none;
+  margin-top: 2em;
+}
+.kard img {
+  height: 400px;
+  object-fit: cover;
+}
+
+.doctors {
+  margin: 2em;
+  border: none;
+  background-color: #ece6e2;
+}
+.doctors img {
+  object-fit: cover;
+  height: 350px; /* Adjust to preferred height */
+  object-fit: cover;
+  width: 100%;
+  object-position: center top;
+}
+
+.icon-container i {
+  font-size: 2.5em; 
+  width: 2em;
+  aspect-ratio: 1/1; 
+  padding-top: 0.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+
+  border-radius: 50%;
+  background-color: #e4dad5;
+  color: #9d8a79; 
+  margin-bottom: 0.5em;
+}
+
+.icon-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.icon-container p {
+  font-size: 1em;
+}
+.accordion-button {
+  background-color: #9d8a79 !important;
+  color: white !important;
+}
+
+.accordion-button::after {
+  filter: brightness(0) invert(1);
+}
+
+.kontakt .form-control {
+  background-color: transparent !important;
+  border: none;
+  border-radius: 0%;
+  border-bottom: 1px solid #3f362f7e;
+  width: 75%;
+
+  color: black;
+  margin: 3em;
+}
+.kontakt .contact-btn {
+  width: 80%;
+  margin: 0 5em;
+  height: 2em;
+  font-size: 18px;
+  text-align: center;
+  background-color: #323431;
+  border: none;
+}
+.information {
+  background-color: #323431bc;
+  color: whitesmoke;
+  font-size: 20px;
+  height: auto;
+  margin-top: 3em;
+}

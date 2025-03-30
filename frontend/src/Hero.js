@@ -1,26 +1,34 @@
 import React from "react";
 import { Image } from "react-bootstrap";
 import herophoto from "./Images/herophoto.jpg";
+import herophoto2 from "./Images/herophoto2.jpg"
 import Button from "react-bootstrap/Button";
-import './SiteCSS.css';
+import "./SiteCSS.css";
 
 const Hero = () => {
   return (
-    <>
-      <Image
-        className="fotohero img-fluid"
-        src={herophoto}
-        alt="a pation with doctor"
-      />
-      <div>
-        <h1>Lorem ipsum dolor sit amet <br></br> consectetur adipiscing el</h1>
-        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
-        <Button variant="primary" style={{ margin: "1em" }}>
-          Primary
+    <div className="hero-container">
+      <Image className="fotohero" src={herophoto2} alt="A patient with doctor" />
+      <div className="hero-content">
+        <h1>Glow with Confidence – Your Beauty, Our Expertise</h1>
+
+        <Button
+          href="/contact/"
+          variant="light"
+          className="fw-bold"
+          style={{ margin: "1em", color: "#9d8a79" }}
+        >
+          Contact Now
         </Button>
-        <Button variant="secondary">Secondary</Button>
+        <Button
+          href="/services/"
+          className="fw-bold"
+          style={{ backgroundColor: "#9d8a79", border: "none" }}
+        >
+          Our Services
+        </Button>
       </div>
-    </>
+    </div>
   );
 };
 

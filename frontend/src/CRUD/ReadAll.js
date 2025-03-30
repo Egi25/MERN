@@ -1,50 +1,56 @@
-import React, {useState,useEffect} from 'react'
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import {Container,Row,Col,Card, Button} from 'react-bootstrap'
-
+import { Container, Row, Col, Card, Button } from "react-bootstrap";
 
 const ReadAll = () => {
-    const [items,setItems]= useState([])
-    useEffect(()=>{
-        const fetchData = async () => {
-            await axios.get("http://localhost:5000/allItems/")
-            .then(res=>{
-              setItems(res.data);
-          console.log(res)})
-            .catch((err)=>console.log(err));
-        };
-        fetchData();
-      
-    },[])
-    
+  const [items, setItems] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      await axios
+        .get("http://localhost:5000/allItems/")
+        .then((res) => {
+          setItems(res.data);
+          console.log(res);
+        })
+        .catch((err) => console.log(err));
+    };
+    fetchData();
+  }, []);
+
   return (
-    <Container>
-        <h1> Read All </h1>
-        <Row>
-
-       {items.map((item)=> {
-       
-        return (
-       
-        <Col xs= {12} md= {6} lg={4}>
-            
-        <Card >
-      <Card.Img variant="top" src={`http://localhost:5000/images/${item.photo}`} />
-      <Card.Body>
-        <Card.Title>{item.title}</Card.Title>
-        <Card.Text>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </Card.Text>
-        <Button variant="primary" href={`/readOne/${item._id}`}>Read more</Button>
-      </Card.Body>
-    </Card> 
-        </Col>
-       )})}
-      </Row>
-    </Container>
-  )
-
+    <>
+      <h1 className="main-banner"> Meet our team </h1>
+      <Container>
+        <p>
+          Our team of experienced professionals is dedicated to helping you
+          achieve your beauty and wellness goals. With expertise in laser
+          treatments, dermal fillers, and advanced facial rejuvenation, our
+          skilled specialists provide personalized care using the latest
+          techniques and state-of-the-art equipment. Meet our friendly and
+          highly trained staff, committed to ensuring you feel confident and
+          radiant after every visit.
+        </p>
+        <Row className="g-2">
+          {items.map((item) => {
+            return (
+              <Col xs={12} md={6} lg={4}>
+                <Card className=" img-fluid doctors">
+                  <Card.Img
+                    variant="top"
+                    src={`http://localhost:5000/images/${item.photo}`}
+                  />
+                  <Card.Body>
+                    <Card.Title className="title">{item.title}</Card.Title>
+                  </Card.Body>
+                </Card>
+              </Col>
+            );
+          })}
+        </Row>
+      </Container>
+      
+    </>
+  );
 };
 
-export default ReadAll
+export default ReadAll;

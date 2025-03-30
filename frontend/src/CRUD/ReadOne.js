@@ -25,7 +25,7 @@ const ReadOne = () => {
    <Container>
 <Row>
     <Col xs={12} >
-    <img src={`http://localhost:5000/images/${item.photo}`}/>
+    <img src={`http://localhost:5000/images/${item.photo}`} className='img-fluid'/>
     </Col>
     <Col xs={12} >
     <h2>{item.title}</h2>

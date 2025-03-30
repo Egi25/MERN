@@ -1,34 +1,41 @@
 import React from "react";
-import { Container, Image, Row, Col,Button } from "react-bootstrap";
+import { Container, Image, Row, Col, Button } from "react-bootstrap";
 import aboutus from "./Images/aboutus.jpg";
 import aboutus2 from "./Images/aboutus2.jpg";
 const About = () => {
   return (
     <div>
-      <h1 className="main-banner" style={{ textAlign: "center" }}>About us</h1>
+      <h2 className="julius-sans-one-regular" style={{ textAlign: "center" }}>
+        About us
+      </h2>
       <Container>
         <Row>
           <Col lg={6}>
             <Image src={aboutus} className="img-fluid" />
           </Col>
-          <Col lg={6} xs={6}>
+          <Col lg={6}>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo <br></br>consequat. Duis aute irure
-              dolor in reprehenderit in voluptate velit esse cillum dolore eu
-              fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-              proident, sunt in culpa qui officia deserunt mollit anim id est
-              laborum. consequat.
+              Founded in 2020, Sisal Beauty has been dedicated to enhancing
+              natural beauty with cutting-edge aesthetic treatments. Over the
+              years, we have established ourselves as a trusted name in laser
+              treatments, dermal fillers, lip fillers, and advanced facial
+              treatments. With a team of experienced professionals and the
+              latest technology, we prioritize safety, precision, and
+              personalized care to help our clients achieve their desired look.
             </p>
             <p>
-              Duis aute irure dolor in reprehenderit in voluptate velit esse
-              cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-              cupidatat non proident, sunt in culpa qui officia deserunt mollit
-              anim id est laborum.
+              Whether it’s skin rejuvenation, anti-aging solutions, or
+              contouring enhancements, Sisal Beauty continues to set the
+              standard for modern aesthetic care. Join us in embracing beauty
+              with confidence—because at Sisal Beauty, your glow is our
+              priority.
             </p>
-            <Button variant="primary">Go somewhere</Button>
+            <Button
+              href="/readall/"
+              style={{ backgroundColor: "#9d8a79", border: "none" }}
+            >
+              Meet our team
+            </Button>
           </Col>
         </Row>
       </Container>

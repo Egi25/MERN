@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Form, Button } from "react-bootstrap";
+import { Row, Col, Card } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 const Create = () => {
   const [item, setItem] = useState({
     title: "",
-    desc: "",
     photo: "",
   });
   const navigate = useNavigate();
@@ -29,46 +29,77 @@ const Create = () => {
       .then((res) => console.log(res))
       .catch((err) => console.log("Data not added.", err));
     navigate("/readAll");
+    // ############################
   };
+  const [items, setItems] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      await axios
+        .get("http://localhost:5000/allItems/")
+        .then((res) => {
+          setItems(res.data);
+          console.log(res);
+        })
+        .catch((err) => console.log(err));
+    };
+    fetchData();
+  }, []);
 
   return (
-    <Container>
-      <h1>Create item</h1>
-      <Form onSubmit={handleSubmit} encType="multipart/form-data">
-        <Form.Group className="mb-3" controlId="title">
-          <Form.Label>Title</Form.Label>
-          <Form.Control
-            type="text"
-            value={item.title}
-            name="title"
-            onChange={handleChange}
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="photo">
-          <Form.Label>Photo</Form.Label>
-          <Form.Control
-            type="file"
-            onChange={handlePhoto}
-            name="photo"
-            accept=".jpg, .png, .jpeg, .webp"
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="desc">
-          <Form.Label>Description</Form.Label>
-          <Form.Control
-            as="textarea"
-            rows={3}
-            value={item.desc}
-            name="desc"
-            onChange={handleChange}
-          />
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          Add Item
-        </Button>
-      </Form>
-      <img src={uploadedImage} alt={item.title} className="img-fluid" />
-    </Container>
+    <>
+      <Container>
+        <h1>Create item</h1>
+        <Form onSubmit={handleSubmit} encType="multipart/form-data">
+          <Form.Group className="mb-3" controlId="title">
+            <Form.Label >Title</Form.Label>
+            <Form.Control
+             
+              type="text"
+              value={item.title}
+              name="title"
+              onChange={handleChange}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="photo">
+            <Form.Label>Photo</Form.Label>
+            <Form.Control
+              type="file"
+              onChange={handlePhoto}
+              name="photo"
+              accept=".jpg, .png, .jpeg, .webp"
+            />
+          </Form.Group>
+
+          <Button variant="primary" type="submit">
+            Add employee
+          </Button>
+        </Form>
+        <img src={uploadedImage} alt={item.title} className="img-fluid" />
+      </Container>
+      <Container>
+        <h1> Meet our team </h1>
+        <Row>
+          {items.map((item) => {
+            return (
+              <Col xs={12} md={6} lg={4}>
+                <Card>
+                  <Card.Img
+                    variant="top"
+                    src={`http://localhost:5000/images/${item.photo}`}
+                  />
+                  <Card.Body>
+                    <Card.Title  className="title">{item.title}</Card.Title>
+                    <Button variant="primary" href={`/readOne/${item._id}`}>
+                      Read more
+                    </Button>
+                  </Card.Body>
+                </Card>
+              </Col>
+            );
+          })}
+        </Row>
+      </Container>
+    </>
   );
 };
 
